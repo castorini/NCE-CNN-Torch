@@ -5,7 +5,7 @@ Introduction
 Given a question and a pair of answer candidates, this tool can be used to predict which answer is more likely to be the correct answer. It can also be extended to other semantic search tasks (i.e., Microblog Search, Duplicate Detection).
 
 It's the open-source implementation of our CIKM'16 paper [1], in which we implement our noisy-contrastive estimation approach on an existing convolution neural network based approach [2]. Our model was evaluated on two standard QA datasets: TrecQA and WikiQA, achieving competitve or even state-of-the-art performance compared with previous work. We also cleaned the TrecQA dataset to two versions: raw and clean. For their difference, please refer to our paper:
-- [1] ``Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks.``
+- ``Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks.``
 - Jinfeng Rao, Hua He, Jimmy Lin, CIKM 2016
 
 Getting Started
@@ -56,6 +56,6 @@ Results
 
 Reference
 --------
-[1] ``Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks,`` Jinfeng Rao, Hua He, Jimmy Lin, CIKM 2016
+``[1]. Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks, Jinfeng Rao, Hua He, Jimmy Lin, CIKM 2016`` 
 
-[2] ``Multi-Perspective Sentence Similarity Modeling with Convolutional Neural Networks,`` Hua He, Kevin Gimpel, and Jimmy Lin, EMNLP 2014
+``[2]. Multi-Perspective Sentence Similarity Modeling with Convolutional Neural Networks, Hua He, Kevin Gimpel, and Jimmy Lin, EMNLP 2014`` 
