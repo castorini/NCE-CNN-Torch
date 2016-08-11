@@ -10,7 +10,7 @@ require('optim')
 require('xlua')
 require('sys')
 require('lfs')
-
+require('os')
 similarityMeasure = {}
 
 include('util/read_data.lua')
@@ -31,16 +31,26 @@ function header(s)
   print(string.rep('-', 80))
 end
 
--- read command line arguments
-local args = lapp [[
-Training script for semantic relatedness prediction on the Twitter dataset.
-  -m,--model  (default dependency) Model architecture: [dependency, lstm, bilstm]
-  -l,--layers (default 1)          Number of layers (ignored for Tree-LSTM)
-  -d,--dim    (default 150)        LSTM memory dimension
-]]
+cmd = torch.CmdLine()
+cmd:text('Options')
+cmd:option('-dataset', 'TrecQA', 'dataset, can be TrecQA or WikiQA')
+cmd:option('-version', 'raw', 'the version of TrecQA dataset, can be raw and clean')
+cmd:option('-num_pairs', 8, 'number of negative samples for each pos sample')
+cmd:option('-neg_mode', 2, 'negative sample strategy, 1 is random sampling, 2 ismax sampling and 3 is mix sampling')
+cmd:text()
+
+opt = cmd:parse(arg)
+
+-- read default arguments
+local args = {
+  model = 'pairwise-conv', --convolutional neural network 
+  layers = 1, -- number of hidden layers in the fully-connected layer
+  dim = 150, -- number of neurons in the hidden layer.
+  dropout_mode = 1 -- add dropout by default, to turn off change its value to 0
+}
 
 local model_name, model_class, model_structure
-model_name = 'convOnly'
+model_name = 'pairwise-conv'
 model_class = similarityMeasure.Conv
 model_structure = model_name
 
@@ -48,8 +58,12 @@ model_structure = model_name
 torch.manualSeed(-3.0753778015266e+18)
 print('<torch> using the automatic seed: ' .. torch.initialSeed())
 
+if opt.dataset ~= 'TrecQA' and opt.dataset ~= 'WikiQA' then
+  print('Error dataset!')
+  os.exit()
+end
 -- directory containing dataset files
-local data_dir = 'data/QA/'
+local data_dir = 'data/' .. opt.dataset .. '/'
 
 -- load vocab
 local vocab = similarityMeasure.Vocab(data_dir .. 'vocab.txt')
@@ -60,11 +74,6 @@ print('loading glove word embeddings')
 local emb_dir = 'data/glove/'
 local emb_prefix = emb_dir .. 'glove.840B'
 local emb_vocab, emb_vecs = similarityMeasure.read_embedding(emb_prefix .. '.vocab', emb_prefix .. '.300d.th')
-
---print('loading paragram_sl999 embeddings')
---local emb_dir = 'data/embedding/paragram_sl999/'
---local emb_prefix = emb_dir .. 'paragram_sl999'
---local emb_vocab, emb_vecs = similarityMeasure.read_embedding(emb_prefix .. '.vocab', emb_prefix .. '.300.th')
 
 local emb_dim = emb_vecs:size(2)
 
@@ -88,10 +97,17 @@ emb_vecs = nil
 collectgarbage()
 local taskD = 'qa'
 -- load datasets
-print('loading QA datasets')
-local train_dir = data_dir .. 'train-all/'
-local dev_dir = data_dir .. 'ibm-dev/'
-local test_dir = data_dir .. 'ibm-test/'
+print('loading datasets' .. opt.dataset)
+if opt.dataset == 'TrecQA' then
+  train_dir = data_dir .. 'train-all/'
+  dev_dir = data_dir .. opt.version .. '-dev/'
+  test_dir = data_dir .. opt.version .. '-test/'
+elseif opt.dataset == 'WikiQA' then
+  train_dir = data_dir .. 'train/'
+  dev_dir = data_dir .. 'dev/'
+  test_dir = data_dir .. 'test/'
+end
+
 local train_dataset = similarityMeasure.read_relatedness_dataset(train_dir, vocab, taskD)
 local dev_dataset = similarityMeasure.read_relatedness_dataset(dev_dir, vocab, taskD)
 local test_dataset = similarityMeasure.read_relatedness_dataset(test_dir, vocab, taskD)
@@ -104,12 +120,14 @@ local model = model_class{
   emb_vecs   = vecs,
   structure  = model_structure,
   num_layers = args.layers,
-  mem_dim    = args.dim,
+  mem_dim   = args.dim,
   task       = taskD,
+  neg_mode   = opt.neg_mode,
+  num_pairs  = opt.num_pairs
 }
 
 -- number of epochs to train
-local num_epochs = 50
+local num_epochs = 20
 
 -- print information
 header('model configuration')

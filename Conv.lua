@@ -15,11 +15,7 @@ function Conv:__init(config)
   self.emb_dim = config.emb_vecs:size(2)
 
   -- number of similarity rating classes
-  if self.task == 'sic' then
-    self.num_classes = 5
-  elseif self.task == 'vid' then
-    self.num_classes = 6
-  elseif self.task == 'twitter' or self.task =='ttg' or self.task=='qa' then
+  if self.task=='qa' then
     self.num_classes = 2
   else
     error("not possible task!")
@@ -175,13 +171,12 @@ function Conv:print_config()
 
   print('num params: ' .. num_params)
   print('word vector dim: ' .. self.emb_dim)
-  print('LSTM memory dim: ' .. self.mem_dim)
   print('regularization strength: ' .. self.reg)
   print('minibatch size: ' .. self.batch_size)
   print('learning rate: ' .. self.learning_rate)
-  print('LSTM structure: ' .. self.structure)
-  print('LSTM layers: ' .. self.num_layers)
-  print('sim module hidden dim: ' .. self.sim_nhidden)
+  print('model structure: ' .. self.structure)
+  print('number of hidden layers: ' .. self.num_layers)
+  print('number of neurons in hidden layer: ' .. self.mem_dim)
 end
 
 function Conv:save(path)
