@@ -228,6 +228,47 @@ function PairwiseConv:selectNegSample(posIndex, dataset, features, num_sample)
   local dist_table = self:getSortedDistTable(posIndex, dataset, features)
   local negIdxs = {}
   for ii = 1, math.min(num_sample, #dist_table) do
+    negIdxs[dist_table[ii][1]] = dist_table[ii][2]
+  end
+  return negIdxs 
+end
+
+function PairwiseConv:mixNegSample(posIndex, dataset, features, num_sample)
+  local dist_table = self:getSortedDistTable(posIndex, dataset, features)
+  local randomNegIdxs = self:randomNegSample(posIndex, dataset, num_sample)
+  local negIdxs = {}
+  local counter = 0
+  self.codelog:write('mix pos index' .. posIndex .. '\n')
+  for ii = 1, math.min(num_sample/2, #dist_table) do
+    negIdxs[dist_table[ii][1]] = dist_table[ii][2]
+    counter = counter + 1
+  end
+  local dist_table2 = {}
+  for ii = 1, #dist_table do
+    dist_table2[dist_table[ii][1]] = dist_table[ii][2]
+  end
+  for idx, _ in pairs(randomNegIdxs) do
+    if counter == num_sample then break end
+    if negIdxs[idx] == nil then
+      negIdxs[idx] = dist_table2[idx]
+      counter = counter + 1
+    end
+  end
+  return negIdxs
+end
+
+function PairwiseConv:getSortedDistTable(posIndex, dataset, features)
+  local neg_docs = self:getNegIndices(posIndex, dataset)
+  local dist_table = {}
+  for ii = 1, #neg_docs do
+    if features == nil or #features == 0 then
+      dist_table[ii] = {neg_docs[ii], 1}
+    else
+      local pos_feas = features[posIndex]
+      local neg_feas = features[neg_docs[ii]]
+      local cosine_dist = self.cos_dist:updateOutput({pos_feas, neg_feas})
+      dist_table[ii] = {neg_docs[ii], cosine_dist[1]}
+    end
   end
   table.sort(dist_table, function(a,b) return a[2]>b[2] end)
   return dist_table
@@ -306,15 +347,6 @@ function PairwiseConv:print_config()
   print('model structure: ' .. self.structure)
   print('number of hidden layers: ' .. self.num_layers)
   print('number of neurons in hidden layer: ' .. self.mem_dim)
-end
-
-function PairwiseConv:predict_dataset(dataset)
-  local predictions = torch.Tensor(dataset.size)
-  for i = 1, dataset.size do
-    local lsent, rsent = dataset.lsents[i], dataset.rsents[i]
-    predictions[i] = self:predictCombination(lsent, rsent)
-  end
-  return predictions
 end
 
 function PairwiseConv:save(path)
