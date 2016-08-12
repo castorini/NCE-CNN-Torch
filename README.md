@@ -4,7 +4,7 @@ Introduction
 -------------
 Given a pair of question and answer candidate, this tool can be used to predict how likely the candidate is the correct answer. It can also be extended to other semantic search tasks (i.e., Microblog Search, Duplicate Detection).
 
-It's the open-source implementation of our CIKM'16 paper [1], in which we implement our noisy-contrastive estimation approach on an existing convolution neural network based approach [2]. Our model was evaluated on two standard QA datasets: TrecQA and WikiQA, achieving competitve or even state-of-the-art performance compared with previous work. We also cleaned the TrecQA dataset to two versions: raw and clean. For their difference and model details, please refer to our paper:
+It's the open-source implementation of our CIKM'16 paper [1], in which we implement the noisy-contrastive estimation approach on an existing convolution neural network based approach [2]. Our model was evaluated on two standard QA datasets: TrecQA and WikiQA, achieving competitve or even state-of-the-art performance compared with previous work. We also cleaned the TrecQA dataset to two versions: raw and clean. For their difference and model details, please refer to our paper:
 - ``Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks.``
 - Jinfeng Rao, Hua He, Jimmy Lin, CIKM 2016
 
