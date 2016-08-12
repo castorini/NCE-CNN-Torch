@@ -17,7 +17,7 @@ Getting Started
 git clone https://github.com/marquis-wu/pairwise-nn.git
 ```
 
-``3.`` Using our script to download and preprocess the Glove word embedding:
+``3.`` Using following script to download and preprocess the Glove word embedding:
 ```
 $ sh fetch_and_preprocess.sh
 ``` 
@@ -29,7 +29,7 @@ Please make sure your python version >= 2.7, otherwise you will encounter an exc
 
 Running
 --------
-``1.`` There are several command line paramters to specify for running our models:
+``1.`` There are several command line paramters to specify for running our model:
 ```
 -dataset, the dataset you want to evaluate, which can be TrecQA and WikiQA. 
 -version, the version of TrecQA dataset, which can be raw and clean. 
@@ -42,7 +42,7 @@ Running
 $ th PairwiseTrainQA.lua -dataset TrecQA -version raw -neg_mode 2 -num_pairs 8
 ```
 To evaluate on the TrecQA clean dataset, simply change -version to clean.
-Similarly, if you want to evaluate on the WikiQA dataset, change -dataset to WikiQA.
+Similarly, if you want to evaluate on the WikiQA dataset, change -dataset to WikiQA (don't need to set the -version).
 You can also change the -neg_mode and -num_pairs to select different sampling strategies or negative pairs.
 
 ``3.`` To run the base convolutional neural network model in [2], please follow the same parameter setting:
@@ -52,7 +52,7 @@ $ th trainQA.lua -dataset TrecQA -version raw
 
 Results
 -------
-You should be able to reproduce some scores close to the numbers in below tables (-num_pairs is set to 8 by default):
+You should be able to reproduce some scores close to the numbers in tables below (-num_pairs is set to 8 by default):
 
 ``1. TrecQA raw`` 
 
@@ -80,7 +80,7 @@ BaseConvNet [2]  | 0.693  | 0.709
 Pairwise(Random) | 0.677  | 0.697
 Pairwise(MAX)    | 0.681  | 0.705
 Pairwise(MIX)    | 0.685  | 0.706
-Though the numbers above don't outperform the base ConvNet model [2] in WikiQA dataset, still they are close. Our best score in WikiQA dataset are 0.701(MAP), 0.718(MRR), which is obtained in the setting of MAX sampling and num_pairs as 10.
+Though the numbers above don't outperform the base ConvNet model [2] in WikiQA dataset, still they are close. Our best scores in WikiQA dataset are 0.701(MAP), 0.718(MRR), which were obtained in the setting of MAX sampling and num_pairs as 10.
 
 Reference
 --------
