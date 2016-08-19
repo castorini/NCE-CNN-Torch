@@ -14,7 +14,7 @@ Getting Started
 
 ``2.`` Checkout our repo:
 ```
-git clone https://github.com/marquis-wu/pairwise-nn.git
+git clone https://github.com/marquis-wu/pairwise-neural-network.git
 ```
 
 ``3.`` Using following script to download and preprocess the Glove word embedding:
@@ -58,7 +58,7 @@ You should be able to reproduce some scores close to the numbers in tables below
 
 TrecQA raw       |  MAP   |  MRR
 -----------------|--------|------
-BaseConvNet [2]  | 0.762  | 0.830
+SentLevel [2]    | 0.762  | 0.830
 Pairwise(Random) | 0.765  | 0.810
 Pairwise(MAX)    | 0.780  | 0.835
 Pairwise(MIX)    | 0.763  | 0.813
@@ -67,7 +67,7 @@ Pairwise(MIX)    | 0.763  | 0.813
 
 TrecQA clean     |  MAP   |  MRR
 -----------------|--------|------
-BaseConvNet [2]  | 0.777  | 0.836
+SentLevel [2]    | 0.777  | 0.836
 Pairwise(Random) | 0.768  | 0.831
 Pairwise(MAX)    | 0.801  | 0.877
 Pairwise(MIX)    | 0.798  | 0.872
@@ -76,7 +76,7 @@ Pairwise(MIX)    | 0.798  | 0.872
 
 WikiQA           |  MAP   |  MRR
 -----------------|--------|------
-BaseConvNet [2]  | 0.693  | 0.709
+SentLevel [2]    | 0.693  | 0.709
 Pairwise(Random) | 0.677  | 0.697
 Pairwise(MAX)    | 0.681  | 0.705
 Pairwise(MIX)    | 0.685  | 0.706
