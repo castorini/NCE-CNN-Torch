@@ -10,7 +10,7 @@ function PairwiseConv:__init(config)
   self.structure     = config.structure     or 'lstm' -- {lstm, bilstm}
   self.sim_nhidden   = config.sim_nhidden   or 150
   self.task          = config.task          or 'qa' 
-  self.neg_mode = config.neg_mode or 2 -- 1 is random, 2 is max, 3 is mix
+  self.neg_mode = config.neg_mode or 3 -- 1 is random, 2 is max, 3 is mix
   self.num_pairs = config.num_pairs or 8
   self.loss_mode = 2 -- 1 is margin loss, 2 is self-defined loss	
   self.dropout_mode = config.dropout_mode or 1 -- 1 is to add dropout layer, dropout prob is 0.5
@@ -238,7 +238,6 @@ function PairwiseConv:mixNegSample(posIndex, dataset, features, num_sample)
   local randomNegIdxs = self:randomNegSample(posIndex, dataset, num_sample)
   local negIdxs = {}
   local counter = 0
-  self.codelog:write('mix pos index' .. posIndex .. '\n')
   for ii = 1, math.min(num_sample/2, #dist_table) do
     negIdxs[dist_table[ii][1]] = dist_table[ii][2]
     counter = counter + 1
