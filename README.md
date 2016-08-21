@@ -79,7 +79,7 @@ WikiQA           |  MAP   |  MRR
 SentLevel [2]    | 0.693  | 0.709
 Pairwise(Random) | 0.677  | 0.697
 Pairwise(MAX)    | 0.681  | 0.705
-Pairwise(MIX)    | 0.685  | 0.706
+Pairwise(MIX)    | 0.682  | 0.697
 Though the numbers above don't outperform the base ConvNet model [2] in WikiQA dataset, still they are close. Our best scores in WikiQA dataset are 0.701(MAP), 0.718(MRR), which were obtained in the setting of MAX sampling and num_pairs as 10.
 
 Reference
