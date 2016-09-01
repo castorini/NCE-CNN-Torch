@@ -1,4 +1,4 @@
-Question Answering with Noisy-Contrastive Estimation with Deep Neural Networks.
+Question Answering using Noisy-Contrastive Estimation with Deep Neural Networks.
 
 Introduction
 -------------
