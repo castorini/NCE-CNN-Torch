@@ -1,4 +1,4 @@
-Question Answering using Noisy-Contrastive Estimation with Deep Neural Networks.
+Non-Factoid Question Answering using Noisy-Contrastive Estimation with Deep Neural Networks.
 
 Introduction
 -------------
