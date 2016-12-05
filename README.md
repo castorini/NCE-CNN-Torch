@@ -14,7 +14,7 @@ Getting Started
 
 ``2.`` Checkout our repo:
 ```
-git clone https://github.com/marquis-wu/pairwise-neural-network.git
+git clone https://github.com/Jeffyrao/pairwise-neural-network.git
 ```
 
 ``3.`` Using following script to download and preprocess the Glove word embedding:
