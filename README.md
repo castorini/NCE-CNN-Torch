@@ -25,7 +25,7 @@ Please make sure your python version >= 2.7, otherwise you will encounter an exc
 
 ``4.`` Currently our tool only supports running on CPUs. 
 
-``5.`` Before you run our model, please set the number of threads >= 5 for parallel processing. This is because our model need a large number of computation resource for training. In our cases, it usually takes 2-3 days to get some good results with the number of threads set to 5.
+``5.`` Before you run our model, please set the number of threads >= 5 for parallel processing. This is because our model need a large number of computation resource for training. 
 ```
 $ export OMP_NUM_THREADS=5
 ```
