@@ -93,7 +93,7 @@ def download_wordvecs(dirpath):
         return
     else:
         os.makedirs(dirpath)
-    url = 'http://www-nlp.stanford.edu/data/glove.840B.300d.zip'
+    url = 'https://nlp.stanford.edu/data/glove.840B.300d.zip'
     unzip(download(url, dirpath))
 
 def download_sick(dirpath):
