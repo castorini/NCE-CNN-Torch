@@ -1,12 +1,10 @@
-Non-Factoid Question Answering using Noisy-Contrastive Estimation with Deep Neural Networks.
+# Noise-Contrastive Estimation for Answer Selection with Convolutional Neural Networks
 
-Introduction
--------------
-Given a pair of question and answer candidate, this tool can predict how likely the candidate is the correct answer. It can also be extended to other semantic search tasks (i.e., Microblog search, semantic textual measurement).
+This repo contains the Torch implementation of noise-contrastive estimation approach for answer selection in question answering with Convolutional Neural Networks, described in the following paper:
 
-It's the open-source implementation of our CIKM'16 paper [1], in which we implement the noisy-contrastive estimation approach on an existing convolution neural network based approach [2]. Our model was evaluated on two standard QA datasets: TrecQA and WikiQA, achieving competitve or even state-of-the-art performance compared with previous work. We also cleaned the TrecQA dataset to two versions: raw and clean. For their difference and model details, please refer to our paper:
-- ``Noisy-Contrastive Estimation for Answer Selection with Deep Neural Networks.``
-- Jinfeng Rao, Hua He, Jimmy Lin, CIKM 2016
++ Jinfeng Rao, Hua He, and Jimmy Lin. [Noise-Contrastive Estimation for Answer Selection with Deep Neural Networks.](http://dl.acm.org/citation.cfm?id=2983872) *Proceedings of the 25th ACM International on Conference on Information and Knowledge Management (CIKM 2016)*, pages 1913-1916.
+
+Our model was evaluated on two standard QA datasets: TrecQA and WikiQA. On TrecQA, we achieved the [best reported results at that time](http://aclweb.org/aclwiki/index.php?title=Question_Answering_(State_of_the_art)). Another contribution of this paper is to clarify the distinction between the *raw* and *clean* versions of the TrecQA test set.
 
 Getting Started
 -----------
