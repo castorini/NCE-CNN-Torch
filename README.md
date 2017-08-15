@@ -4,7 +4,7 @@ This repo contains the Torch implementation of noise-contrastive estimation appr
 
 + Jinfeng Rao, Hua He, and Jimmy Lin. [Noise-Contrastive Estimation for Answer Selection with Deep Neural Networks.](http://dl.acm.org/citation.cfm?id=2983872) *Proceedings of the 25th ACM International on Conference on Information and Knowledge Management (CIKM 2016)*, pages 1913-1916.
 
-Our model was evaluated on two standard QA datasets: TrecQA and WikiQA. On TrecQA, we achieved the [best reported results at that time](http://aclweb.org/aclwiki/index.php?title=Question_Answering_(State_of_the_art)). Another contribution of this paper is to clarify the distinction between the *raw* and *clean* versions of the TrecQA test set.
+Our model was evaluated on two standard QA datasets: TrecQA and WikiQA. On TrecQA, we achieved the [best reported results at that time](https://aclweb.org/aclwiki/Question_Answering_(State_of_the_art)). Another contribution of this paper is to clarify the distinction between the *raw* and *clean* versions of the TrecQA test set.
 
 Getting Started
 -----------
